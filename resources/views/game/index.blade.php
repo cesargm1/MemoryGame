@@ -13,6 +13,7 @@
             <section class="actions">
             <button class="start">Empezar juego</button>
             <button class="reset">resetear</button>
+            <button class="update">↪</button>
         </section>
 
         <div class="timer-section">
