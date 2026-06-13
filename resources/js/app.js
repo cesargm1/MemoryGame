@@ -69,6 +69,10 @@ const resetButon = () => {
     counter = 0;
     timerValue.innerHTML = counter;
     start.disabled = false;
+    let cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+        card.classList.remove("flip");
+    });
 };
 
 const initGame = () => {
