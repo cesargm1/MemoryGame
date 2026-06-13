@@ -11,7 +11,7 @@ class MemoryGameController extends Controller
      */
     public function index()
     {
-        return view('game.index');
+        return view('game.memory.index');
     }
 
     /**

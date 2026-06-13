@@ -7,4 +7,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/game', [MemoryGameController::class, 'index']);
+route::prefix('/game')->group(function () {
+
+    Route::get('/selectGame', function () {
+        return view('game.selectGame');
+    });
+    Route::get('/memoryGame', [MemoryGameController::class, 'index']);
+});

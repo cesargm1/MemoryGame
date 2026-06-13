@@ -9,18 +9,22 @@ let interval = null;
 const cards = ["a", "b", "c", "d", "e", "f"];
 
 const copyOfCards = Array.from(cards);
+let gameStarted = false;
 
 const joinCards = [...cards, ...copyOfCards];
 
 const startButton = () => {
+    gameStarted = true;
     interval = setInterval(() => {
-        if (counter < 100) {
+        if (counter < 10) {
             counter = counter + 1;
             timerValue.innerHTML = counter;
+            start.disabled = true;
         } else {
             clearInterval(interval);
             counter = 0;
             timerValue.innerHTML = counter;
+            start.disabled = false;
         }
     }, 1000);
 };
@@ -36,27 +40,40 @@ const renderBoard = (shuffled) => {
         let card = document.createElement("div");
         card.classList.add("card");
         board.appendChild(card);
-        card.innerHTML = "?";
+        const front = document.createElement("div");
+        front.classList.add("card-front");
+        card.appendChild(front);
+        front.innerHTML = "?";
+
+        const back = document.createElement("div");
+        back.classList.add("card-back");
+        card.appendChild(back);
+        back.innerHTML = item;
 
         card.addEventListener("click", () => {
-            card.innerHTML = item;
-            card.classList.add("flip");
-            card.classList.add("card-back");
+            if (gameStarted === true) {
+                card.classList.toggle("flip");
+            }
         });
+
+        if (gameStarted === false) {
+            card.classList.remove("flip");
+        }
     });
 };
 
 const resetButon = () => {
+    gameStarted = false;
     clearInterval(interval);
     interval = null;
     counter = 0;
     timerValue.innerHTML = counter;
+    start.disabled = false;
 };
 
 const initGame = () => {
     const shuffled = mixed(joinCards);
     renderBoard(shuffled);
-    startButton();
 };
 
 document.addEventListener("DOMContentLoaded", initGame);
