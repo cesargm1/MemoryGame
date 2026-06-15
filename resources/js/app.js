@@ -9,6 +9,10 @@ let interval = null;
 const cards = ["a", "b", "c", "d", "e", "f"];
 
 const copyOfCards = Array.from(cards);
+
+let card1 = null;
+let card2 = null;
+
 let gameStarted = false;
 
 const joinCards = [...cards, ...copyOfCards];
@@ -16,21 +20,18 @@ const joinCards = [...cards, ...copyOfCards];
 const startButton = () => {
     gameStarted = true;
     interval = setInterval(() => {
-        if (counter < 10) {
+        if (counter >= 0) {
             counter = counter + 1;
             timerValue.innerHTML = counter;
             start.disabled = true;
         } else {
-            clearInterval(interval);
-            counter = 0;
-            timerValue.innerHTML = counter;
             start.disabled = false;
         }
     }, 1000);
 };
 
 const mixed = (joinCards) => {
-    let shuffled = joinCards.sort(() => Math.random() - 0.5); // no entiendo el .5
+    let shuffled = joinCards.sort(() => Math.random() - 0.5);
     return shuffled;
 };
 
@@ -52,7 +53,18 @@ const renderBoard = (shuffled) => {
 
         card.addEventListener("click", () => {
             if (gameStarted === true) {
+                if (card.classList.contains("flip")) {
+                    return;
+                }
                 card.classList.toggle("flip");
+                if (card1 === null) {
+                    card1 = card;
+                } else {
+                    card2 = card;
+
+                    // comprobar si son correctas
+                    cardsEqueals();
+                }
             }
         });
 
@@ -60,6 +72,24 @@ const renderBoard = (shuffled) => {
             card.classList.remove("flip");
         }
     });
+};
+
+const cardsEqueals = () => {
+    if (card1.innerHTML === card2.innerHTML) {
+        card1 = null;
+        card2 = null;
+        card1.classList.add("front");
+        card2.classList.add("front");
+        card1.disabled;
+        card2.disabled;
+    } else {
+        setTimeout(() => {
+            card1.classList.remove("flip");
+            card2.classList.remove("flip");
+            card1 = null;
+            card2 = null;
+        }, 500);
+    }
 };
 
 const resetButon = () => {
