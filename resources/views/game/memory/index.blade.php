@@ -19,6 +19,7 @@
         <div class="timer-section">
             <span class="timer">Tiempo:</span>
             <span class="timer-value">0</span>
+            <span class="moves"></span>
         </div>
 
         <section class="board"></section>

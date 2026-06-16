@@ -8,6 +8,6 @@
 </head>
 <body>
     Seleciona tu juego
-    <a href="../game/memoryGame">juego de memoria</a>
+    <a href="../game/memory-game">juego de memoria</a>
 </body>
 </html>
