@@ -21,6 +21,8 @@ const copyOfCards = Array.from(cards);
 let card1 = null;
 let card2 = null;
 let moves = 0;
+let match = 0;
+let lockBoard = false;
 
 let gameStarted = false;
 
@@ -31,7 +33,7 @@ const startButton = () => {
     interval = setInterval(() => {
         if (counter >= 0) {
             counter = counter + 1;
-            timerValue.innerHTML = counter;
+            timerValue.innerHTML = "tiempo: " + counter;
             start.disabled = true;
         } else {
             start.disabled = false;
@@ -66,18 +68,47 @@ const renderBoard = (shuffled) => {
 
         card.addEventListener("click", () => {
             if (gameStarted === true) {
+                if (lockBoard === false) {
+                    return;
+                }
                 if (card.classList.contains("flip")) {
                     return;
                 }
+
                 card.classList.toggle("flip");
                 if (card1 === null) {
                     card1 = card;
                 } else {
                     card2 = card;
+                    lockBoard = true;
 
                     // comprobar si son correctas
                     cardsEqueals();
                     updateMoves();
+
+                    if (match === cards.length) {
+                        const dialogStats = document.createElement("dialog");
+                        dialogStats.classList.add("dialogStats");
+                        document.body.appendChild(dialogStats);
+                        const dialogMoves = document.createElement("p");
+                        dialogMoves.innerText =
+                            "movimientos realizados: " + moves;
+                        dialogStats.appendChild(dialogMoves);
+                        const dialogTime = document.createElement("p");
+                        dialogTime.innerText =
+                            "Tiempo: " + counter + " segundos";
+                        dialogStats.appendChild(dialogTime);
+                        const closeModal = document.createElement("button");
+                        closeModal.innerText = "Cerrar pop up";
+                        dialogStats.appendChild(closeModal);
+                        dialogStats.showModal();
+
+                        closeModal.addEventListener("click", () => {
+                            dialogStats.close();
+                        });
+
+                        resetButon();
+                    }
                 }
             }
         });
@@ -90,14 +121,17 @@ const renderBoard = (shuffled) => {
 
 const cardsEqueals = () => {
     if (card1.dataset.value === card2.dataset.value) {
+        match++;
         card1 = null;
         card2 = null;
+        lockBoard = false;
     } else {
         setTimeout(() => {
             card1.classList.remove("flip");
             card2.classList.remove("flip");
             card1 = null;
             card2 = null;
+            lockBoard = false;
         }, 500);
     }
 };
@@ -110,16 +144,19 @@ const updateMoves = () => {
 const resetButon = () => {
     gameStarted = false;
     clearInterval(interval);
-    interval = null;
+    interval = 0;
     counter = 0;
     moves = 0;
-    timerValue.innerHTML = counter;
-    movesEl.innerHTML = moves;
+    match = 0;
+    timerValue.innerHTML = "Tiempo: 0";
+    movesEl.innerHTML = "Tus movimientos: 0";
     start.disabled = false;
     let cardsElements = document.querySelectorAll(".card");
     cardsElements.forEach((card) => {
         card.classList.remove("flip");
     });
+    const shuffled = mixed(joinCards);
+    renderBoard(shuffled);
 };
 
 const initGame = () => {
