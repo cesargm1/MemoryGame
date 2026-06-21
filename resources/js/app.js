@@ -68,7 +68,7 @@ const renderBoard = (shuffled) => {
 
         card.addEventListener("click", () => {
             if (gameStarted === true) {
-                if (lockBoard === false) {
+                if (lockBoard === true) {
                     return;
                 }
                 if (card.classList.contains("flip")) {

@@ -1,19 +1,25 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogOutController;
+use App\Http\Controllers\Auth\RegisterController as AuthRegisterController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MemoryGameController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
 
 Route::get('/contact', [ContactController::class, 'index']);
 
-route::prefix('/game')->group(function () {
-
-    Route::get('/selectGame', function () {
-        return view('game.selectGame');
-    });
+Route::middleware('auth')->group(function () {
     Route::get('/memory-game', [MemoryGameController::class, 'index']);
 });
+Route::get('/register', [AuthRegisterController::class, 'create']);
+Route::post('/register', [AuthRegisterController::class, 'store']);
+
+Route::get('/login', [LoginController::class, 'create']);
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+Route::post('/', [LogOutController::class, 'logout']);
