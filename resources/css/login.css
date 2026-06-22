@@ -69,3 +69,17 @@ body {
     font-size: 12px;
     color: #aaa;
 }
+
+.alert {
+    padding: 1em;
+    color: white;
+    margin-top: 15px;
+}
+.alert-danger {
+    background-color: red;
+    box-shadow: inset -22px -46px 67px -3px rgba(146, 42, 42, 0.59);
+}
+
+.alert-danger:hover {
+    background-color: rgb(99, 6, 6);
+}

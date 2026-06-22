@@ -32,6 +32,13 @@
             <input type="password" name="confirm_password">
         </label>
         <button type="submit">Registrarse</button>
+          @if ($errors->any())
+           @foreach ($errors->all() as $error)
+             <div class="alert alert-danger" role="alert">
+                 {{ $error }}
+             </div>
+          @endforeach
+        @endif
   </form>
 </body>
 </html>
