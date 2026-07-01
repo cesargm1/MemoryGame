@@ -1,0 +1,56 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+.ranking {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.position {
+    font-size: 20px;
+    font-weight: bold;
+    color: #38bdf8;
+}
+
+.info {
+    text-align: right;
+}
+
+.points {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.user {
+    font-size: 14px;
+    color: #94a3b8;
+}

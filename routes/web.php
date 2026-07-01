@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LogOutController;
 use App\Http\Controllers\Auth\RegisterController as AuthRegisterController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MemoryGameController;
+use App\Http\Controllers\ScoreController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,7 @@ Route::get('/contact', [ContactController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/memory-game', [MemoryGameController::class, 'index']);
+    Route::get('/memory-game/ranking', [ScoreController::class, 'index']);
 });
 Route::get('/register', [AuthRegisterController::class, 'create']);
 Route::post('/register', [AuthRegisterController::class, 'store']);

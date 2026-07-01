@@ -22,6 +22,7 @@ let card1 = null;
 let card2 = null;
 let moves = 0;
 let match = 0;
+let points = 0;
 let lockBoard = false;
 
 let gameStarted = false;
@@ -66,7 +67,7 @@ const renderBoard = (shuffled) => {
         img.title = item;
         card.dataset.value = item;
 
-        card.addEventListener("click", () => {
+        card.addEventListener("click", async () => {
             if (gameStarted === true) {
                 if (lockBoard === true) {
                     return;
@@ -97,7 +98,12 @@ const renderBoard = (shuffled) => {
                         const dialogTime = document.createElement("p");
                         dialogTime.innerText =
                             "Tiempo: " + counter + " segundos";
+                        points = calcPoints();
                         dialogStats.appendChild(dialogTime);
+                        const dialogPoints = document.createElement("p");
+                        dialogPoints.innerText = "tus puntos son " + points;
+                        dialogStats.appendChild(dialogPoints);
+                        await savePoints();
                         const closeModal = document.createElement("button");
                         closeModal.innerText = "Cerrar pop up";
                         dialogStats.appendChild(closeModal);
@@ -157,6 +163,35 @@ const resetButon = () => {
     });
     const shuffled = mixed(joinCards);
     renderBoard(shuffled);
+};
+
+const calcPoints = () => {
+    let base = 10000;
+    points = base - counter * 10 - moves * 100;
+    return points;
+};
+
+const savePoints = async () => {
+    try {
+        await fetch("http://localhost:8000/sanctum/csrf-cookie", {
+            credentials: "include",
+        });
+
+        const response = await fetch("http://localhost:8000/api/scores", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+            },
+            body: JSON.stringify({
+                points: points,
+                game: "memory",
+            }),
+        });
+    } catch (error) {
+        console.error("Error:", error);
+    }
 };
 
 const initGame = () => {
