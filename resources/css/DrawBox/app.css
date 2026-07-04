@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f3f4f6;
+    font-family: Arial, Helvetica, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    padding: 30px;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: white;
+
+    padding: 12px 18px;
+
+    border: 2px solid #222;
+    border-radius: 10px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.color {
+    width: 45px;
+    height: 45px;
+
+    border: none;
+    background: none;
+
+    cursor: pointer;
+}
+
+.trash {
+    width: 38px;
+    height: 38px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.trash:hover {
+    transform: scale(1.1);
+}
+
+.drawing-area {
+    background: white;
+
+    border: 2px solid #222;
+    border-radius: 10px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.brush-size {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brush-size label {
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+.size {
+    width: 140px;
+    cursor: pointer;
+}
+
+.size-value {
+    width: 45px;
+    text-align: center;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    color: #444;
+}

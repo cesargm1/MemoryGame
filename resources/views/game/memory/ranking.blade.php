@@ -18,7 +18,7 @@
             <div class="position">{{$loop->iteration}}</div>
             <div class="info">
                 <p class="points">puntos: {{$score->points}}</p>
-                <p class="user">👤 {{ $score->user->nickname }}</p> // no entiendo 
+                <p class="user">👤 {{ $score->user->nickname }}</p>
             </div>
         </div>
         @endforeach

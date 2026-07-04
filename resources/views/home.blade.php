@@ -62,6 +62,20 @@
                 </div>
             </div>
 
+             <div class="card">
+                <div class="card-image">
+                    <img class="card-img" src="/img/home/draw-box.png" alt="draw">
+                </div>
+
+                <div class="card-content">
+                    <h3>Draw box</h3>
+                    <p class="card__p">Dibuja lo que quieras</p>
+                    <a href="/draw-box" class="play-btn">
+                        Jugar
+                    </a>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-image"></div>
 

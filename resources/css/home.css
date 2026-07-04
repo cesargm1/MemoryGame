@@ -124,6 +124,10 @@ body {
     margin-bottom: 15px;
 }
 
+.card__p {
+    color: black;
+}
+
 .play-btn {
     display: inline-block;
     padding: 10px 20px;

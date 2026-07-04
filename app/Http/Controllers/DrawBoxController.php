@@ -2,25 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Score;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ScoreController extends Controller
+class DrawBoxController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $scores = Score::orderBy('points', 'desc')
-            ->with('user')
-            ->limit(10)
-            ->get();
-
-        return view('game.memory.ranking', [
-            'scores' => $scores
-        ]);
+        return view('game.DrawBox.index');
     }
 
     /**
@@ -36,21 +27,7 @@ class ScoreController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            "points" => 'required|integer',
-            "game" => 'required|string'
-        ]);
-        Score::create([
-            "user_id" => Auth::user()->id,
-            "points" => $request->points,
-            "game" => $request->game
-        ]);
-
-        return response()->json([
-            "user_id" => Auth::user()->id,
-            "points" => $request->points,
-            "game" => $request->game,
-        ]);
+        //
     }
 
     /**
