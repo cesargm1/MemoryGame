@@ -2,8 +2,8 @@ const drawArea = document.querySelector(".drawing-area");
 const bin = document.querySelector(".trash");
 const color = document.querySelector(".color");
 const size = document.getElementById("size");
+const sizeValue = document.querySelector(".size-value");
 const ctx = drawArea.getContext("2d");
-ctx.lineWith = 1;
 ctx.lineCap = "round";
 let isInto = false;
 let isDrawing = false;
@@ -37,9 +37,9 @@ drawArea.addEventListener("mousemove", function (event) {
     const pos = getPos(event);
 
     if (isDrawing) {
-        //  console.log((drawArea.innerHTML = x + " : " + y));
         ctx.lineTo(pos.x, pos.y);
         ctx.strokeStyle = color.value;
+        ctx.lineWidth = size.value;
         ctx.stroke();
     }
 });
@@ -81,10 +81,11 @@ drawArea.toBlob(
 );
 
 size.addEventListener("click", function () {
-    console.log(size.value);
+    sizeValue.textContent = `${size.value}px`;
     return size.value;
 });
 
 color.addEventListener("click", function () {
+    color.textContent = color.value;
     return color.value;
 });

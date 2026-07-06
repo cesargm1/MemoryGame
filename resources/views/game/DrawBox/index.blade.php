@@ -20,7 +20,7 @@
        <div class="brush-size">
 
           <label>
-             Grosor
+             Grosor de la linea
              <input
             type="range"
             class="size"
@@ -29,7 +29,7 @@
             max="100"
             value="6">
          </label>
-        <span class="size-value">6 px</span>
+        <span class="size-value"></span>
     </div>
 
 
