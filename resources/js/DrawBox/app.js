@@ -3,15 +3,16 @@ const bin = document.querySelector(".trash");
 const color = document.querySelector(".color");
 const size = document.getElementById("size");
 const sizeValue = document.querySelector(".size-value");
+const download = document.querySelector(".download");
+const eraser = document.querySelector(".eraser");
 const ctx = drawArea.getContext("2d");
 ctx.lineCap = "round";
 let isInto = false;
 let isDrawing = false;
+let isEraser = false;
 
 let x = 0;
 let y = 0;
-
-const backgroundColorImg = "white";
 
 drawArea.addEventListener("mouseover", function () {
     // console.log("entraste en el dibujo");
@@ -58,28 +59,32 @@ drawArea.addEventListener("mouseup", function () {
     isDrawing = false;
 });
 
+const paintBackground = () => {
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, drawArea.width, drawArea.height);
+};
+paintBackground();
+
 const deleteBin = () => {
-    ctx.clearRect(0, 0, drawArea.width, drawArea.height);
+    paintBackground();
 };
 
 bin.addEventListener("click", deleteBin);
 
-drawArea.toBlob(
-    (blob) => {
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.classList.add("dowload");
-        a.download = "canvas-image.png";
-        a.textContent = "Descargar imagen";
+const dowloadImg = () => {
+    drawArea.toBlob(
+        (blob) => {
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "canvas-image.png";
+            a.click();
+        },
+        "image/png",
+        1.0,
+    );
+};
 
-        ctx.fillStyle = backgroundColorImg;
-        ctx.fillRect(0, 0, drawArea.width, drawArea.height);
-        document.body.append(a);
-    },
-    "image/png",
-    1.0,
-);
-
+download.addEventListener("click", dowloadImg);
 size.addEventListener("click", function () {
     sizeValue.textContent = `${size.value}px`;
     return size.value;
@@ -89,3 +94,5 @@ color.addEventListener("click", function () {
     color.textContent = color.value;
     return color.value;
 });
+
+eraser.addEventListener("click", toggleEraser());

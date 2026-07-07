@@ -66,8 +66,6 @@ h1 {
 }
 
 .drawing-area {
-    background: white;
-
     border: 2px solid #222;
     border-radius: 10px;
 
@@ -99,4 +97,63 @@ h1 {
     font-weight: bold;
 
     color: #444;
+}
+
+.download {
+    padding: 10px 18px;
+
+    border: 2px solid #222;
+    border-radius: 8px;
+
+    background: #222;
+    color: white;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.download:hover {
+    background: #444;
+}
+
+.download:active {
+    transform: scale(0.98);
+}
+
+.eraser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 45px;
+    height: 45px;
+
+    border: 2px solid #222;
+    border-radius: 8px;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.eraser:hover {
+    background: #f1f1f1;
+    transform: scale(1.05);
+}
+
+.eraser:active {
+    transform: scale(0.95);
+}
+
+.eraser svg {
+    width: 24px;
+    height: 24px;
+
+    color: #222;
 }
