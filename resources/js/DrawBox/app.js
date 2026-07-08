@@ -4,7 +4,7 @@ const color = document.querySelector(".color");
 const size = document.getElementById("size");
 const sizeValue = document.querySelector(".size-value");
 const download = document.querySelector(".download");
-const eraser = document.querySelector(".eraser");
+let eraser = document.querySelector(".eraser");
 const ctx = drawArea.getContext("2d");
 ctx.lineCap = "round";
 let isInto = false;
@@ -37,9 +37,14 @@ function getPos(e) {
 drawArea.addEventListener("mousemove", function (event) {
     const pos = getPos(event);
 
+    if (isEraser) {
+        ctx.strokeStyle = color.value;
+    } else {
+        ctx.strokeStyle = "#ffff";
+    }
+
     if (isDrawing) {
         ctx.lineTo(pos.x, pos.y);
-        ctx.strokeStyle = color.value;
         ctx.lineWidth = size.value;
         ctx.stroke();
     }
@@ -95,4 +100,8 @@ color.addEventListener("click", function () {
     return color.value;
 });
 
-eraser.addEventListener("click", toggleEraser());
+eraser.addEventListener("click", function () {
+    isEraser = !isEraser;
+    console.log(isEraser);
+    return isEraser;
+});
