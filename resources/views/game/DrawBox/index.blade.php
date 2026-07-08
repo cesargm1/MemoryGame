@@ -68,8 +68,26 @@
             <button class="download">
                 Descargar
             </button>
-        </div>
 
+            <button class="gallery-btn">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 5C4 3.9 4.9 3 6 3H18C19.1 3 20 3.9 20 5V17C20 18.1 19.1 19 18 19H6C4.9 19 4 18.1 4 17V5Z"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linejoin="round"/>
+
+        <path d="M8 14L11 11L14 14L17 10L20 13"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+
+        <circle cx="8.5" cy="8" r="1.5" fill="currentColor"/>
+    </svg>
+
+    <span>Guardar en la galería</span>
+</button>
+        </div>
         <canvas class="drawing-area" width="700" height="600"></canvas>
     </div>
 </body>
