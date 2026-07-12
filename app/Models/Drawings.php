@@ -10,6 +10,7 @@ class Drawings extends Model
     protected $fillable = [
         'user_id',
         'image',
+        'game'
     ];
 
     public function user(): BelongsTo

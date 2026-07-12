@@ -5,6 +5,7 @@ const size = document.getElementById("size");
 const sizeValue = document.querySelector(".size-value");
 const download = document.querySelector(".download");
 let eraser = document.querySelector(".eraser");
+const save = document.querySelector(".gallery-btn");
 const ctx = drawArea.getContext("2d");
 ctx.lineCap = "round";
 let isInto = false;
@@ -105,3 +106,33 @@ eraser.addEventListener("click", function () {
     console.log(isEraser);
     return isEraser;
 });
+
+const saveGallery = async () => {
+    try {
+        await fetch("http://localhost:8000/sanctum/csrf-cookie", {
+            credentials: "include",
+        });
+
+        drawArea.toBlob(async (blob) => {
+            const formData = new FormData();
+
+            formData.append("image", blob, "drawing.png");
+            formData.append("game", "DrawBox");
+
+            const response = await fetch("http://localhost:8000/api/drawings", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                },
+                body: formData,
+            });
+
+            console.log(response.status);
+        }, "image/png");
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+save.addEventListener("click", saveGallery);
