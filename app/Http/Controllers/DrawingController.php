@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Drawings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DrawingController extends Controller
 {
@@ -28,6 +31,20 @@ class DrawingController extends Controller
             "image" => 'required|image',
             "game" => 'required|string'
         ]);
+
+        $path = Storage::disk("public")->putFile('img/drawings', $request->file('image'));
+
+        Drawings::create([
+            "user_id" => Auth::user()->id,
+            "image" => $path,
+            "game" => $request->game
+        ]);
+
+        return response()->json([
+            "user_id" => Auth::user()->id,
+            "image" => $path,
+            "game" => $request->game
+        ], 200);
     }
 
     /**

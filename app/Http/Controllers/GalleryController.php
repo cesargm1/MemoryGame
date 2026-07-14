@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Drawings;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -12,7 +13,10 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        return view('game.DrawBox.gallery');
+        $drawings = Drawings::with('user')->get();
+        return view('game.DrawBox.gallery', [
+            "drawings" => $drawings
+        ]);
     }
 
     /**

@@ -130,6 +130,7 @@ const saveGallery = async () => {
 
             console.log(response.status);
         }, "image/png");
+        alert("dibujo guardado")
     } catch (error) {
         console.error(error);
     }
