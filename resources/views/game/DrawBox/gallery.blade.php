@@ -49,16 +49,21 @@
         .card:hover{
             transform:translateY(-5px);
         }
+    .image {
+      height: 220px;
+      background: #ececec;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
 
-        .image{
-            height:220px;
-            background:#ececec;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            color:#888;
-            font-size:18px;
-        }
+.image img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     display: block;
+   }
 
         .info{
             padding:15px;
@@ -89,9 +94,8 @@
                 
             <div class="card">
                 <div class="image">
-                    <img src="storage/app/public/img/drawings/{{$drawing->image}}" alt="draw">
+                <img src="{{ asset("storage/{$drawing->image}") }}" alt="thumbnails">
                 </div>
-
                 <div class="info">
                     <h3>usuario {{$drawing->user->nickname}}</h3>
                     <p>Juego: DrawBox</p>
